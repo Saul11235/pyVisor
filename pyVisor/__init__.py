@@ -6,6 +6,12 @@ import webbrowser
 try:    from .getObj import getObj
 except: from getObj  import getObj
 
+try:    from .viewContent  import viewContent
+except: from viewContent   import viewContent
+
+try:    from .viewVoid     import viewVoid
+except: from viewVoid      import viewVoid
+
 class visor:
 
     def __init__(self,obj,name):
@@ -20,12 +26,27 @@ class visor:
         #--------config path-------------
         @self.app.route("/")
         def blank():
-            return "blank"
+            array=self.obj.inipath()
+            data=self.obj.get(array)
+            up=self.obj.up(array)
+            down=self.obj.down(array)
+            #---return
+            return viewContent(data[1],array,up,down)
+
         #--------customg path-------------
         @self.app.route("/<path:custom_path>")
         def path(custom_path):
             array=custom_path.split("/")
-            return array
+            data=self.obj.get(array)
+            #-----------------------------
+            if data[0]==True:
+                up=self.obj.up(array)
+                down=self.obj.down(array)
+                # content
+                return viewContent(data[1],array,up,down)
+            #-------------------------
+            else:
+                return viewVoid()
 
     #----------------------------------------------
 
