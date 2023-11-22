@@ -1,4 +1,4 @@
-/*style css*/
+/*style css ----------------------------------------*/
 body {
   background-color: darkblue;
   font-family: Arial, Helvetica, sans-serif;
@@ -10,3 +10,21 @@ body {
   padding: 20px;
   margin: 20px;
 }
+/*Nagigation header -------------------------------- */
+#navigation {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+#navigation :visited {
+  color: black;
+}
+#navigation a { 
+  text-decoration: none;
+}
+#navigatio a:hover{
+  color: red;
+}
+/*--------------------------------------------------- */
