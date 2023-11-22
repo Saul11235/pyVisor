@@ -22,50 +22,22 @@ class viewContent:
         self.getObj=getObj
         #---------------
         self.page=render() #creating render page
+        self.page.title(array[len(array)-1]) #title
         self.__make()
-
-        pass
-
-    def __make(self):
-        w=self.page.set # for  easy config
         #---------------
 
-        w("<div id='container'>")
-
+    def __make(self):
+        w=self.page.set        # for  easy config
+        ww=self.page.setFormat
+        #---------------
+        w("<div id='container'>") # begin container --------------------------
+        #-------
         self.__navigatorArray()
-        # back to home--------
-        if len(self.array)>1: w("<a href='/'>back to home</a>")
-        #---------------------
+        self.__typeNavigation()
+        self.__contenObj() #table of contents
 
-        # content -----------
-        w("<p>")
-
-        content=""
-        try: content=str(self.obj).replace("<","&lt").replace(">","&gt").replace("\n","<br>")
-        except: pass
-        if content!="":
-            w("<h2>Content</h2>")
-            w(content)
-
-        typ=""
-        try: typ=str(type(self.obj)).replace("<","&lt").replace(">","&gt")
-        except:pass
-        if typ!="":
-            w("<h2>Type</h2>")
-            w(typ)
-
-        doc=""
-        try: doc=str(self.obj.__doc__).replace("<","&lt").replace(">","&gt").replace("\n","<br>")
-        except: pass
-        if doc!="":
-            w("<h2>Doc</h2>")
-            w(doc)
-
-        w("</p>") #End content
-
-
-
-        w("<p>")
+        w("<p>") # begin SubObjects
+        w("<h3>SubObjects</h3>")
         w("<ul>")
         for elem in self.down.keys():
             w("<li>")
@@ -73,9 +45,9 @@ class viewContent:
             w("</li>")
 
         w("</ul>")
-        w("</p>")
+        w("</p>") # ende SubObjects
 
-        w("</div>")  #end container
+        w("</div>")  #end container #---------------------------------------
 
 
     def __navigatorArray(self):
@@ -86,6 +58,45 @@ class viewContent:
             acumulator.append(element)
             buttons.append("<a href='"+get_url(acumulator)+"'>"+element+"</a>")
         self.page.set("<h1 id='navigation'>"+str(".".join(buttons))+"</h1>")
+
+    def __typeNavigation(self):
+        # define type navigation barr
+        print(self.array)
+        if len(self.array)>1: 
+            self.page.set("<p>  <table id='navtype'> <tr>  <td> <a href='/'>home</a> </td> <td>")
+            self.page.set(self.array)
+            self.page.set("</td> ")
+            self.page.set("</tr> </table>  <p>")
+        #---------------------------------
+
+    def __contenObj(self):
+        # define table showing content
+        self.page.set("<table id='tcontent'> <tbody>") # begin  table -----------
+        content=""
+        try: content=str(self.obj)
+        except: pass
+        if content!="":
+            self.page.set("<tr> <td class='graybg'>Content</td> <td class='whitebg'>")
+            self.page.setFormat(content)
+            self.page.set("</td> </tr>")
+        typ=""
+        try: typ=str(type(self.obj))
+        except:pass
+        if typ!="":
+            self.page.set("<tr> <td class='graybg'>Type</td>  <td class='whitebg'>")
+            self.page.setFormat(typ)
+            self.page.set("</td> </tr>")
+        doc=""
+        try: doc=str(self.obj.__doc__)
+        except: pass
+        if doc!="":
+            self.page.set("<tr> <td class='graybg'>Doc</td> <td class='whitebg'>")
+            self.page.setFormat(doc)
+            self.page.set("</td> </tr>")
+        self.page.set("</tbody></table>") # end table ----------------
+
+
+
 
 
     def get(self):

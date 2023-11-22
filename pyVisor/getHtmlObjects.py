@@ -6,7 +6,7 @@ body {
   font-size:  3.1ex;
 }
 #container {
-  background-color: whitesmoke;
+  background-color: lightblue;
   border-radius: 20px;
   padding: 20px;
   margin: 20px;
@@ -28,7 +28,33 @@ body {
 #navigatio a:hover{
   color: red;
 }
+/*Table obj content---------------------------------- */
+table {
+  border-collapse: collapse;
+}
+#tcontent td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  font-family: monospace;
+  padding: 4px;
+}
+#tcontent .graybg {
+  background-color: lightgray;
+  font-weight: bold;
+}
+#tcontent .whitebg {
+  background-color: white ;
+}
+#navtype tr td {
+  padding: 10px;
+  margin:  10px;
+  color: red;
+}
 /*--------------------------------------------------- */
+
+
+/*--------------------------------------------------- */
+
 """
 def getjs(): return """/*script javascript*/
 console.log("hello world")

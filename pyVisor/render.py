@@ -23,8 +23,12 @@ class render:
         self.__name=str(title)
 
     def set(self,string):
-        "add an linte to the html page"
+        "add an line to the html page"
         self.__content=self.__content+"\n"+str(string)
+
+    def setFormat(self,string):
+        "add line an add an format text to read in html"
+        self.set(string.replace("<","&lt").replace(">","&gt").replace("\n","<br>"))
 
     def get(self):
         "get all html code"
