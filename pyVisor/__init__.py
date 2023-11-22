@@ -23,7 +23,7 @@ class visor:
         obj - tkinter,  name="tkiner" """
         self.obj=getObj(obj,name)
         self.app=Flask(__name__)
-        #--------config path-------------
+        #--------config url-------------
         @self.app.route("/")
         def blank():
             array=self.obj.inipath()
@@ -31,9 +31,9 @@ class visor:
             up=self.obj.up(array)
             down=self.obj.down(array)
             #---return
-            return viewContent(data[1],array,up,down)
-
-        #--------customg path-------------
+            page=viewContent(data[1],array,up,down,self.obj)
+            return page.get()
+        #--------customg url-------------
         @self.app.route("/<path:custom_path>")
         def path(custom_path):
             array=custom_path.split("/")
@@ -43,10 +43,14 @@ class visor:
                 up=self.obj.up(array)
                 down=self.obj.down(array)
                 # content
-                return viewContent(data[1],array,up,down)
+                page=viewContent(data[1],array[:],up,down,self.obj)
+                html=page.get()
+                return html
             #-------------------------
             else:
-                return viewVoid()
+                page=viewVoid()
+                html=page.get()
+                return html
 
     #----------------------------------------------
 

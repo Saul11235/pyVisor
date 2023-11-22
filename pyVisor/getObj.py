@@ -1,4 +1,4 @@
-# geto obj by Edwin saul
+# getObj by Edwin saul
 
 class getObj:
 
@@ -73,12 +73,13 @@ class getObj:
         """elements in the parent conatiner array in
         format dict {nameObject, array} """
         if len(array)>1:
-            array.pop()
-            data=self.get(array)
+            narray=array[::]
+            narray.pop()
+            data=self.get(narray)
             #--------
             if data[0]:
                 dic={}
-                for element in dir(data[1]):dic[element]=array+[element]
+                for element in dir(data[1]):dic[element]=narray+[element]
                 return dic
             else: return {}
             #--------
