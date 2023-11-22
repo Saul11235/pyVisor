@@ -1,0 +1,49 @@
+# pyVisor by Edwin Saul Pareja
+
+from flask import Flask
+import webbrowser 
+
+try:    from .getObj import getObj
+except: from getObj  import getObj
+
+class visor:
+
+    def __init__(self,obj,name):
+        """creating class visor
+        obj   - object
+        name  - "name of object" string
+        example:
+        import tkinter
+        obj - tkinter,  name="tkiner" """
+        self.obj=getObj(obj,name)
+        self.app=Flask(__name__)
+        #--------config path-------------
+        @self.app.route("/")
+        def blank():
+            return "blank"
+        #--------customg path-------------
+        @self.app.route("/<path:custom_path>")
+        def path(custom_path):
+            array=custom_path.split("/")
+            return array
+
+    #----------------------------------------------
+
+    def run(self,port=8000,debug=False):
+        """open webbrowser and open flask server
+        port=8000 default
+        debug=False (default)"""
+        webbrowser.open("http://localhost:"+str(port))
+        self.app.run(host="0.0.0.0",port=str(int(port)),debug=bool(debug))
+        exit()
+
+    #----------------------------------------------
+
+if __name__=="__main__":
+
+    import tkinter
+    v=visor(tkinter,"tkinter")
+    v.run()
+    print("----------------")
+    print("test finished...")
+
