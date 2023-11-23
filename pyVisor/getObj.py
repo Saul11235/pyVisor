@@ -1,5 +1,12 @@
 # getObj by Edwin saul
 
+#-----------------------
+def is_private(name):
+    if len(name)==0:return False
+    elif name[0]=="_": return True
+    else: return False
+
+#-----------------------
 class getObj:
 
     def __init__(self,obj,name):
@@ -18,13 +25,11 @@ class getObj:
         self.name=name
 
     #----------------------------------------------
-
     def inipath(self): 
         """return initial path ["initial"]"""
         return [self.name]
 
     #----------------------------------------------
-
     def get(self,array):
         """self.get(array)
         returns {bool,obj}
@@ -56,7 +61,6 @@ class getObj:
             return [exists,subobj]
         
     #----------------------------------------------
-
     def down(self,array):
         """elements contained in the array object defined
         format dict {nameObject, array} """
@@ -68,7 +72,6 @@ class getObj:
         else: return {}
 
     #----------------------------------------------
-
     def up(self,array):
         """elements in the parent conatiner array in
         format dict {nameObject, array} """
@@ -86,6 +89,38 @@ class getObj:
         else: return {}
  
     #----------------------------------------------
+    def getStrContent(self,array):
+        "return string content known array"
+        data=self.get(array)
+        try: return str(data[1])
+        except: return ""
+
+    #----------------------------------------------
+    def getStrType(self,array):
+        "return string type known array"
+        data=self.get(array)
+        try: return str(type(data[1])).replace("'>","").replace("<class '","")
+        except: return ""
+
+    #----------------------------------------------
+    def getStrDoc(self,array):
+        "return string doc known array"
+        data=self.get(array)
+        try: return str(data[1].__doc__)
+        except: return ""
+
+    #----------------------------------------------
+    def getStrCount(self,array):
+        "return string count number of public and private subobjects"
+        data=self.down(array).keys()
+        public=0;private=0
+        for elem in data:
+            if is_private(elem): private+=1
+            else: public+=1
+        return str(public+private)+" (pub:"+str(public)+" priv:"+str(private)+")"
+
+
+
 
 
 if __name__=="__main__":

@@ -20,12 +20,17 @@ class viewContent:
         self.up=up
         self.down=down
         self.getObj=getObj
+        self.__initVarExists=False
+        try:down["__init__"]; self.__initVarExists=True
+        except:pass
+
         #---------------
         self.page=render() #creating render page
         self.page.title(array[len(array)-1]) #title
         self.__make()
         #---------------
 
+    #------------------------------------------------------
     def __make(self):
         w=self.page.set        # for  easy config
         ww=self.page.setFormat
@@ -50,6 +55,7 @@ class viewContent:
         w("</div>")  #end container #---------------------------------------
 
 
+    #------------------------------------------------------
     def __navigatorArray(self):
         # define navigation header
         buttons=[]
@@ -59,40 +65,50 @@ class viewContent:
             buttons.append("<a href='"+get_url(acumulator)+"'>"+element+"</a>")
         self.page.set("<h1 id='navigation'>"+str(".".join(buttons))+"</h1>")
 
+    #------------------------------------------------------
     def __typeNavigation(self):
         # define type navigation barr
         print(self.array)
         if len(self.array)>1: 
-            self.page.set("<p>  <table id='navtype'> <tr>  <td> <a href='/'>home</a> </td> <td>")
-            self.page.set(self.array)
-            self.page.set("</td> ")
-            self.page.set("</tr> </table>  <p>")
+            self.page.set("<p id='navtypecontent'>")
+            l=[];npath=[]
+            for element in self.array:
+                npath.append(element)
+                #creating new button on type nav bar -------
+                l.append("<a class='navtype' href='"+get_url(npath)+"'>"
+                         +str(self.getObj.getStrType(npath))
+                         +"</a>")
+                #------------------------------------------
+            self.page.set("  ".join(l))
+            self.page.set("</p>")
         #---------------------------------
 
+    #------------------------------------------------------
     def __contenObj(self):
         # define table showing content
         self.page.set("<table id='tcontent'> <tbody>") # begin  table -----------
-        content=""
-        try: content=str(self.obj)
-        except: pass
-        if content!="":
-            self.page.set("<tr> <td class='graybg'>Content</td> <td class='whitebg'>")
-            self.page.setFormat(content)
+        #--content---
+        self.page.set("<tr> <td class='graybg'>Content</td> <td class='whitebg'>")
+        self.page.setFormat(self.getObj.getStrContent(self.array))
+        self.page.set("</td> </tr>")
+        #-type--------
+        self.page.set("<tr> <td class='graybg'>Type</td>  <td class='whitebg'>")
+        self.page.setFormat(self.getObj.getStrType(self.array))
+        self.page.set("</td> </tr>")
+        #-doc---------
+        self.page.set("<tr> <td class='graybg'>Doc</td> <td class='whitebg'>")
+        self.page.setFormat(self.getObj.getStrDoc(self.array)) 
+        self.page.set("</td> </tr>")
+        #-count--------
+        self.page.set("<tr> <td class='graybg'>Count</td> <td class='whitebg'>")
+        self.page.setFormat(self.getObj.getStrCount(self.array)) 
+        self.page.set("</td> </tr>")
+        #-__init__-----
+        if self.__initVarExists:
+            self.page.set("<tr> <td class='graybg'>__init__</td> <td class='whitebg'>")
+            self.page.setFormat(self.getObj.getStrDoc(self.array+["__init__"])) 
             self.page.set("</td> </tr>")
-        typ=""
-        try: typ=str(type(self.obj))
-        except:pass
-        if typ!="":
-            self.page.set("<tr> <td class='graybg'>Type</td>  <td class='whitebg'>")
-            self.page.setFormat(typ)
-            self.page.set("</td> </tr>")
-        doc=""
-        try: doc=str(self.obj.__doc__)
-        except: pass
-        if doc!="":
-            self.page.set("<tr> <td class='graybg'>Doc</td> <td class='whitebg'>")
-            self.page.setFormat(doc)
-            self.page.set("</td> </tr>")
+        #-----------------
         self.page.set("</tbody></table>") # end table ----------------
 
 

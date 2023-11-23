@@ -25,8 +25,22 @@ body {
 #navigation a { 
   text-decoration: none;
 }
-#navigatio a:hover{
-  color: red;
+/*type navigation bar------------------------------- */
+#navtypecontent {
+  line-height: 1.8;
+} 
+.navtype {
+  font-size: 1em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: black;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 4px;
+}
+.navtype :visited {
+  color:white;
 }
 /*Table obj content---------------------------------- */
 table {
