@@ -9,6 +9,9 @@ def get_url(array):
     for element in array: text=text+"/"+str(element)
     return text
 
+def cut(num,element):
+    if len(element)<=num: return element
+    else: return element[0:num-3]+"..."
 
 
 class viewContent:
@@ -37,20 +40,10 @@ class viewContent:
         #---------------
         w("<div id='container'>") # begin container --------------------------
         #-------
-        self.__navigatorArray()
-        self.__typeNavigation()
-        self.__contenObj() #table of contents
-
-        w("<p>") # begin SubObjects
-        w("<h3>SubObjects</h3>")
-        w("<ul>")
-        for elem in self.down.keys():
-            w("<li>")
-            w("<a href='"+get_url(self.down[elem])+"'>"+elem+"</a>")
-            w("</li>")
-
-        w("</ul>")
-        w("</p>") # ende SubObjects
+        self.__navigatorArray()  # Header
+        self.__typeNavigation()  # navigator by type
+        self.__contenObj()       # table of contents
+        self.__subobjects()      # table of subchilds
 
         w("</div>")  #end container #---------------------------------------
 
@@ -71,15 +64,14 @@ class viewContent:
         print(self.array)
         if len(self.array)>1: 
             self.page.set("<p id='navtypecontent'>")
-            l=[];npath=[]
+            npath=[]
             for element in self.array:
                 npath.append(element)
                 #creating new button on type nav bar -------
-                l.append("<a class='navtype' href='"+get_url(npath)+"'>"
-                         +str(self.getObj.getStrType(npath))
-                         +"</a>")
+                self.page.set("<a class='navtype' href='"+get_url(npath)+"'>")
+                self.page.setFormat(self.getObj.getStrType(npath))
+                self.page.set("</a>")
                 #------------------------------------------
-            self.page.set("  ".join(l))
             self.page.set("</p>")
         #---------------------------------
 
@@ -110,6 +102,56 @@ class viewContent:
             self.page.set("</td> </tr>")
         #-----------------
         self.page.set("</tbody></table>") # end table ----------------
+
+    def __get_sort_child_list(self):
+        return list(self.down.keys())
+
+    def __subobjects(self):
+        w=self.page.set
+        ww=self.page.setFormat
+        w("<h3>SubObjects</h3>")
+        w("<table class='tableContent'>  <thead> <tr>")
+        w("<th> SubObject </th>")
+        w("<th> type      </th>")
+        w("<th> Content   </th>")
+        w("<th> Doc       </th>")
+        w("<th> Count     </th>")
+        w("</tr> </thead>")
+        w("<tbody>")
+        for elem in self.__get_sort_child_list():
+            w("<tr>") #-inicio-------------------------
+            subArray=self.down[elem]
+
+            w("<td>")
+            w("<a href='"+get_url(subArray)+"'>")
+            ww(elem)
+            w("</a>")
+            w("</td>")
+
+            w("<td>")
+            ww(cut(10,self.getObj.getStrType(subArray)))
+            w("</td>")
+
+            w("<td>")
+            ww(cut(30,self.getObj.getStrContent(subArray)))
+            w("</td>")
+
+            w("<td>")
+            ww(cut(30,self.getObj.getStrDoc(subArray)))
+            w("</td>")
+
+
+            w("<td>")
+            ww(cut(20,self.getObj.getStrCount(subArray)))
+            w("</td>")
+
+
+
+            w("</tr>") # fin item ----------------------
+
+        w("</tbody> </table>") #------------------------
+
+
 
 
 

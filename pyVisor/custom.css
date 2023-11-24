@@ -64,7 +64,22 @@ table {
   color: red;
 }
 /*--------------------------------------------------- */
-
-
+.tableContent {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+.tableContent thead tr th {
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 4px;
+  color: black;
+  background-color: lightgray;
+}
+.tableContent tbody tr td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 4px;
+  background-color: white ;
+}
 /*--------------------------------------------------- */
 
