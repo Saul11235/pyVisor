@@ -31,10 +31,10 @@ class viewContent:
         self.up=up
         self.down=down
         self.getObj=getObj
+        self.basicTypes=["int","float","dict","list","tuple","str","bool"]
         self.__initVarExists=False
         try:down["__init__"]; self.__initVarExists=True
         except:pass
-
         #---------------
         self.page=render() #creating render page
         self.page.title(array[len(array)-1]) #title
