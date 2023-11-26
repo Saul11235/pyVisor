@@ -1,5 +1,7 @@
 # getObj by Edwin saul
 
+from inspect import signature
+
 #-----------------------
 def is_private(name):
     if len(name)==0:return False
@@ -120,6 +122,13 @@ class getObj:
         return str(public+private)+" (pub:"+str(public)+" priv:"+str(private)+")"
 
 
+    #----------------------------------------------
+    def getStrSignature(self,array):
+        "return string doc known array"
+        data=self.get(array)
+        try: return str(signature(data[1]))
+        except: return ""
+
 
 
 
@@ -147,5 +156,6 @@ if __name__=="__main__":
     print(a.up(["tkinter","Tk","lolo"]))
 
     print("----------------")
+    print(a.getStrSignature(["tkinter"]))
     print("test finished...")
 

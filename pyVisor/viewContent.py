@@ -100,6 +100,12 @@ class viewContent:
             self.page.set("<tr> <td class='graybg'>__init__</td> <td class='whitebg'>")
             self.page.setFormat(self.getObj.getStrDoc(self.array+["__init__"])) 
             self.page.set("</td> </tr>")
+        #-signature-----
+        signature=self.getObj.getStrSignature(self.array)
+        if signature!="":
+            self.page.set("<tr> <td class='graybg'>signature</td> <td class='whitebg'>")
+            self.page.setFormat(signature)
+            self.page.set("</td> </tr>")
         #-----------------
         self.page.set("</tbody></table>") # end table ----------------
 
