@@ -3,17 +3,25 @@
 try   :  from .render import render
 except:  from render  import render
 
+#-------------------------------------
 def get_url(array):
     "get /url/format from ['url','format']"
     text=""
     for element in array: text=text+"/"+str(element)
     return text
 
+#-------------------------------------
 def cut(num,element):
     if len(element)<=num: return element
     else: return element[0:num-3]+"..."
 
+#-------------------------------------
+def is_private(name):
+    if len(name)==0:return False
+    elif name[0]=="_": return True
+    else: return False
 
+#-------------------------------------
 class viewContent:
 
     def __init__(self,obj,array,up,down,getObj):
@@ -110,7 +118,15 @@ class viewContent:
         self.page.set("</tbody></table>") # end table ----------------
 
     def __get_sort_child_list(self):
-        return list(self.down.keys())
+        initialList= list(self.down.keys())
+        public=[]
+        private=[]
+        for element in initialList:
+            if is_private(element): private.append(element)
+            else: public.append(element)
+        return public+private
+
+
 
     def __subobjects(self):
         w=self.page.set
