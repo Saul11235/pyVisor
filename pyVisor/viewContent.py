@@ -117,15 +117,24 @@ class viewContent:
         #-----------------
         self.page.set("</tbody></table>") # end table ----------------
 
+
     def __get_sort_child_list(self):
         initialList= list(self.down.keys())
-        public=[]
-        private=[]
+        public=[];private=[]
         for element in initialList:
             if is_private(element): private.append(element)
             else: public.append(element)
-        return public+private
+        return self.__sort_by_type(public)+self.__sort_by_type(private)
 
+
+    def __sort_by_type(self,array):
+        complex_vars=[]; basic_vars=[]
+        for element in array:
+            fullArray=self.array+[element]
+            typeOnArray=self.getObj.getStrType(fullArray)
+            if typeOnArray in self.basicTypes: basic_vars.append(element)
+            else:complex_vars.append(element)
+        return complex_vars+basic_vars
 
 
     def __subobjects(self):
