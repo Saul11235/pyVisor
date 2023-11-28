@@ -103,11 +103,16 @@ table {
   color: black;
   font-weight: bold;
   font-style: italic;
+  background-color: white ;
+  margin: 2px;
+  padding: 2px;
+  border-color: black;
+  border-style: solid;
+  border-width: thin;
 }
 #navBarSUBOBJ2 a:visited {
   color: black;
 }
-
 /*--------------------------------------------------- */
 
 
