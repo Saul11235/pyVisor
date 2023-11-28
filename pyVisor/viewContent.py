@@ -145,6 +145,7 @@ class viewContent:
         w("<table class='tableContent'>  <thead> <tr>")
         w("<th> SubObject </th>")
         w("<th> type      </th>")
+        w("<th> signature </th>")
         w("<th> Content   </th>")
         w("<th> Doc       </th>")
         w("<th> Count     </th>")
@@ -165,15 +166,19 @@ class viewContent:
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(20,self.getObj.getStrContent(subArray).replace("\n","")))
+            ww(cut(20,self.getObj.getStrSignature(subArray)))
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(20,self.getObj.getStrDoc(subArray).replace("\n","")))
+            ww(cut(15,self.getObj.getStrContent(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(20,self.getObj.getStrCount(subArray).replace("\n","")))
+            ww(cut(15,self.getObj.getStrDoc(subArray).replace("\n","")))
+            w("</td>")
+            #-----------------------
+            w("<td>")
+            ww(cut(15,self.getObj.getStrCount(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
             w("</tr>") # fin item ----------------------
