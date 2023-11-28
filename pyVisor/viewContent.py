@@ -141,6 +141,7 @@ class viewContent:
         w=self.page.set
         ww=self.page.setFormat
         w("<h3>SubObjects</h3>")
+        self.__navSubobjectsBar()
         w("<table class='tableContent'>  <thead> <tr>")
         w("<th> SubObject </th>")
         w("<th> type      </th>")
@@ -152,35 +153,62 @@ class viewContent:
         for elem in self.__get_sort_child_list():
             w("<tr>") #-inicio-------------------------
             subArray=self.down[elem]
-
+            #-----------------------
             w("<td>")
             w("<a href='"+get_url(subArray)+"'>")
             ww(elem)
             w("</a>")
             w("</td>")
-
+            #-----------------------
             w("<td>")
             ww(cut(10,self.getObj.getStrType(subArray)))
             w("</td>")
-
+            #-----------------------
             w("<td>")
             ww(cut(30,self.getObj.getStrContent(subArray)))
             w("</td>")
-
+            #-----------------------
             w("<td>")
             ww(cut(30,self.getObj.getStrDoc(subArray)))
             w("</td>")
-
-
+            #-----------------------
             w("<td>")
             ww(cut(20,self.getObj.getStrCount(subArray)))
             w("</td>")
-
-
-
+            #-----------------------
             w("</tr>") # fin item ----------------------
-
         w("</tbody> </table>") #------------------------
+        pass
+
+
+    def __navSubobjectsBar(self):  # navigation bar subobjects
+        w=self.page.set
+        ww=self.page.setFormat
+        public=[]
+        for item in self.down.keys():
+            if not(is_private(item)): public.append(item)
+        basic=[]      # basic type
+        no_basic=[]   # no basic tyupe
+        for element in public:
+            fullpath=self.array+[element]
+            typeOnArray=self.getObj.getStrType(fullpath)
+            if typeOnArray in self.basicTypes: basic.append(element)
+            else:no_basic.append(element)
+        #-------------------
+        if len(no_basic):
+            w("<p id='navBarSUBOBJ1'>")
+            for element in no_basic:
+                w("<a href='"+get_url(self.array+[element])+"'>"+element+"</a>")
+            w("</p>")
+        #-------------------
+        if len(basic):
+            w("<p id='navBarSUBOBJ2'>")
+            for element in basic:
+                w("<a href='"+get_url(self.array+[element])+"'>"+element+"</a>")
+            w("</p>")
+        #-------------------
+
+
 
 
 

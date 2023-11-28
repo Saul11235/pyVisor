@@ -83,6 +83,33 @@ table {
   background-color: white ;
 }
 /*--------------------------------------------------- */
+/*subobjext navigation slide*/
+#navBarSUBOBJ1 a {
+  text-decoration: none;
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: darkblue;
+  color: white;
+  margin: 2px;
+  padding: 2px;
+}
+#navBarSUBOBJ1 a:visited {
+  color: white;
+}
+/*----------------------------------------------*/
+#navBarSUBOBJ2 a {
+  text-decoration: none;
+  font-size: 0.8em;
+  color: black;
+  font-weight: bold;
+}
+#navBarSUBOBJ2 a:visited {
+  color: black;
+}
+
+/*--------------------------------------------------- */
+
+
 
 """
 def getjs(): return """/*script javascript*/

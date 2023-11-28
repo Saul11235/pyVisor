@@ -1,5 +1,7 @@
 # script make getHtmlObjects.py  
 
+print("html obj")
+
 css=open("pyVisor/custom.css","r")
 js =open("pyVisor/custom.js","r")
 py =open("pyVisor/getHtmlObjects.py","w")

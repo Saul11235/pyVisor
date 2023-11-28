@@ -28,7 +28,7 @@ class render:
 
     def setFormat(self,string):
         "add line an add an format text to read in html"
-        self.set(string.replace("<","&lt").replace(">","&gt").replace("\n","<br>").replace("\t","&emsp;"))
+        self.set(string.replace("<","&lt").replace(">","&gt").replace("\n","<br>").replace("\t","&nbsp;"))
 
     def get(self):
         "get all html code"
