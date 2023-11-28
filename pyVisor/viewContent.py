@@ -165,15 +165,15 @@ class viewContent:
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(30,self.getObj.getStrContent(subArray)))
+            ww(cut(20,self.getObj.getStrContent(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(30,self.getObj.getStrDoc(subArray)))
+            ww(cut(20,self.getObj.getStrDoc(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
             w("<td>")
-            ww(cut(20,self.getObj.getStrCount(subArray)))
+            ww(cut(20,self.getObj.getStrCount(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
             w("</tr>") # fin item ----------------------

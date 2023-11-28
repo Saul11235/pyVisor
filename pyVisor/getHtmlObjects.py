@@ -88,10 +88,10 @@ table {
   text-decoration: none;
   font-size: 0.8em;
   font-weight: bold;
-  background-color: darkblue;
+  background-color: black;
   color: white;
-  margin: 2px;
-  padding: 2px;
+  margin: 3px;
+  padding: 3px;
 }
 #navBarSUBOBJ1 a:visited {
   color: white;
@@ -102,6 +102,7 @@ table {
   font-size: 0.8em;
   color: black;
   font-weight: bold;
+  font-style: italic;
 }
 #navBarSUBOBJ2 a:visited {
   color: black;
