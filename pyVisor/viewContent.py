@@ -142,7 +142,7 @@ class viewContent:
         ww=self.page.setFormat
         w("<h3>SubObjects</h3>")
         self.__navSubobjectsBar()
-        w("<table class='tableContent'>  <thead> <tr>")
+        w("<table>  <thead> <tr>")
         w("<th> SubObject </th>")
         w("<th> type      </th>")
         w("<th> signature </th>")
@@ -152,32 +152,45 @@ class viewContent:
         w("</tr> </thead>")
         w("<tbody>")
         for elem in self.__get_sort_child_list():
-            w("<tr>") #-inicio-------------------------
             subArray=self.down[elem]
+            strType=self.getObj.getStrType(subArray)
+            label=""
+            #-begin--------------------------------
+            if is_private(elem):
+                label="cell_private" 
+            else: #public
+                if strType in self.basicTypes:
+                    label="cell_basic_type"
+                else: # complex type
+                    label="cell_complex_type"
             #-----------------------
-            w("<td>")
+            w("<tr>")
+            #-----------------------
+            w("<td class='"+label+"'>")
             w("<a href='"+get_url(subArray)+"'>")
             ww(elem)
             w("</a>")
             w("</td>")
             #-----------------------
-            w("<td>")
+            w("<td class='"+label+"'>")
             ww(cut(10,self.getObj.getStrType(subArray)))
             w("</td>")
             #-----------------------
-            w("<td>")
-            ww(cut(20,self.getObj.getStrSignature(subArray)))
+            sgntr=self.getObj.getStrSignature(subArray)
+            if sgntr=="": w("<td class='bg-black'>")
+            else:w("<td class='"+label+"'>")
+            ww(cut(15,self.getObj.getStrSignature(subArray)))
             w("</td>")
             #-----------------------
-            w("<td>")
+            w("<td class='"+label+"'>")
             ww(cut(15,self.getObj.getStrContent(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
-            w("<td>")
+            w("<td class='"+label+"'>")
             ww(cut(15,self.getObj.getStrDoc(subArray).replace("\n","")))
             w("</td>")
             #-----------------------
-            w("<td>")
+            w("<td class='"+label+"'>")
             ww(cut(15,self.getObj.getStrCount(subArray).replace("\n","")))
             w("</td>")
             #-----------------------

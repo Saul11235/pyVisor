@@ -66,7 +66,6 @@ table {
 #navtype tr td {
   padding: 10px;
   margin:  10px;
-  color: red;
 }
 /*--------------------------------------------------- */
 .tableContent {
@@ -118,8 +117,25 @@ table {
   color: black;
 }
 /*--------------------------------------------------- */
-
-
+table tr td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+.bg-black {
+  background-color: darkgray;
+}
+.cell_private {
+  background-color: lightgray;
+}
+.cell_basic_type {
+  background-color: khaki;
+}
+.cell_complex_type {
+  background-color: white;
+} 
+.bg-black {
+  background-color: black;
+}
 /*python objects--------------------------------------*/
 
 /*--------------------------------------------------- */
