@@ -52,6 +52,7 @@ class viewContent:
         self.__typeNavigation()  # navigator by type
         self.__contenObj()       # table of contents
         self.__subobjects()      # table of subchilds
+        self.__footer()          # footer of app
 
         w("</div>")  #end container #---------------------------------------
 
@@ -76,7 +77,7 @@ class viewContent:
             for element in self.array:
                 npath.append(element)
                 #creating new button on type nav bar -------
-                self.page.set("<a class='navtype' href='"+get_url(npath)+"'>")
+                self.page.set("<a class='navtype btn "+self.getObj.getStrType(npath)+"' href='"+get_url(npath)+"'>")
                 self.page.setFormat(self.getObj.getStrType(npath))
                 self.page.set("</a>")
                 #------------------------------------------
@@ -143,12 +144,12 @@ class viewContent:
         w("<h3>SubObjects</h3>")
         self.__navSubobjectsBar()
         w("<table>  <thead> <tr>")
-        w("<th> SubObject </th>")
-        w("<th> type      </th>")
-        w("<th> signature </th>")
-        w("<th> Content   </th>")
-        w("<th> Doc       </th>")
-        w("<th> Count     </th>")
+        w("<th class='bg-gray'> SubObject </th>")
+        w("<th class='bg-gray'> type      </th>")
+        w("<th class='bg-gray'> signature </th>")
+        w("<th class='bg-gray'> Content   </th>")
+        w("<th class='bg-gray'> Doc       </th>")
+        w("<th class='bg-gray'> Count     </th>")
         w("</tr> </thead>")
         w("<tbody>")
         for elem in self.__get_sort_child_list():
@@ -167,7 +168,8 @@ class viewContent:
             w("<tr>")
             #-----------------------
             w("<td class='"+label+"'>")
-            w("<a href='"+get_url(subArray)+"'>")
+            w("<a class='btn "+strType+"'")
+            w("href='"+get_url(subArray)+"'>")
             ww(elem)
             w("</a>")
             w("</td>")
@@ -216,22 +218,20 @@ class viewContent:
         if len(no_basic):
             w("<p id='navBarSUBOBJ1'>")
             for element in no_basic:
-                w("<a href='"+get_url(self.array+[element])+"'>"+element+"</a>")
+                w("<a class='btn "+self.getObj.getStrType(self.array+[element])+"'")
+                w("href='"+get_url(self.array+[element])+"'>"+element+"</a>")
             w("</p>")
         #-------------------
         if len(basic):
             w("<p id='navBarSUBOBJ2'>")
             for element in basic:
-                w("<a href='"+get_url(self.array+[element])+"'>"+element+"</a>")
+                w("<a class='btn "+self.getObj.getStrType(self.array+[element])+"'")
+                w("href='"+get_url(self.array+[element])+"'>"+element+"</a>")
             w("</p>")
         #-------------------
 
-
-
-
-
-
-
+    def __footer(self):
+        self.page.set("<p id='footer'>pyVisor writed by <a href='https://edwinsaul.com'>Edwin Saul</a></p>")
 
 
     def get(self):
