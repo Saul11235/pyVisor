@@ -70,18 +70,16 @@ class viewContent:
     #------------------------------------------------------
     def __typeNavigation(self):
         # define type navigation barr
-        print(self.array)
-        if len(self.array)>1: 
-            self.page.set("<p id='navtypecontent'>")
-            npath=[]
-            for element in self.array:
-                npath.append(element)
-                #creating new button on type nav bar -------
-                self.page.set("<a class='navtype btn "+self.getObj.getStrType(npath)+"' href='"+get_url(npath)+"'>")
-                self.page.setFormat(self.getObj.getStrType(npath))
-                self.page.set("</a>")
-                #------------------------------------------
-            self.page.set("</p>")
+        self.page.set("<p id='navtypecontent'>")
+        npath=[]
+        for element in self.array:
+            npath.append(element)
+            #creating new button on type nav bar -------
+            self.page.set("<a class='navtype btn "+self.getObj.getStrType(npath)+"' href='"+get_url(npath)+"'>")
+            self.page.setFormat(self.getObj.getStrType(npath))
+            self.page.set("</a>")
+            #------------------------------------------
+        self.page.set("</p>")
         #---------------------------------
 
     #------------------------------------------------------

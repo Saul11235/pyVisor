@@ -199,6 +199,18 @@ table tr th {
  color: black;}
 .bool:visited {color: black}
 /*--------------------------------------------------- */
+#footer {
+  text-align: center;
+}
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+#footer a:visited {
+  color: black;
+}
+/*--------------------------------------------------- */
 """
 def getjs(): return """/*script javascript*/
 console.log("hello world")
