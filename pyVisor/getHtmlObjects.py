@@ -24,6 +24,10 @@ body {
 }
 #navigation a { 
   text-decoration: none;
+  color: black;
+}
+#navigation a:visited{ 
+  color: black;
 }
 /*type navigation bar------------------------------- */
 #navtypecontent {
@@ -116,7 +120,9 @@ table {
 /*--------------------------------------------------- */
 
 
+/*python objects--------------------------------------*/
 
+/*--------------------------------------------------- */
 """
 def getjs(): return """/*script javascript*/
 console.log("hello world")
