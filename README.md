@@ -1,7 +1,7 @@
 # pyVisor
 
 [![view on github](https://img.shields.io/badge/-view_on_github-blue)](https://github.com/Saul11235/pyVisor)
-[![test examples](https://img.shields.io/badge/-test_examples-black)](https://github.com/Saul11235/pyVisor/test/)
+[![test examples](https://img.shields.io/badge/-test_examples-green)](https://github.com/Saul11235/pyVisor/tree/master/test)
 [![view on PyPI](https://img.shields.io/badge/-view_on_PyPI-red)](https://pypi.org/project/pyVisor/)
 
 
@@ -17,13 +17,11 @@ view the content of an python object
 
 python scpript:
 <pre>
-```
 from pyVisor import visor
 v=visor(object,"NameObject")
 v.run()
-```
 </pre>
 
 writed by:
-[![Edwin Saul](https://img.shields.io/badge/-Edwin_Saul-blue)](https:edwinsaul.com)
+[![Edwin Saul](https://img.shields.io/badge/-Edwin_Saul-black)](https://edwinsaul.com)
 
