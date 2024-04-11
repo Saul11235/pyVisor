@@ -109,6 +109,7 @@ class viewContent:
             self.page.set("</td> </tr>")
         #-signature-----
         signature=self.getObj.getStrSignature(self.array)
+        signature=formatSignatureString(signature)
         if signature!="":
             self.page.set("<tr> <td class='graybg'>signature</td> <td class='whitebg'>")
             self.page.setFormat(signature)
@@ -236,4 +237,16 @@ class viewContent:
         "get html code of view page"
         return self.page.get()
 
+#------------------------------------------------------
 
+def formatSignatureString(string):
+    try:
+        string=string.replace(", ",",\n\t")
+        if string[0]=="(":
+            string= "(\n"+ string.replace("(",string[0], "", 1)
+        string=string.replace(") =>","\n) =>")    
+        return string
+    except:
+        return string
+
+#-----------------------------------------------------
