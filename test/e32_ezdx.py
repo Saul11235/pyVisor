@@ -1,7 +1,7 @@
 from pyVisor import visor
 
-import ezdx
+import ezdxf
 
-v=visor(ezdx,"ezdx")
+v=visor(ezdxf,"ezdxf")
 v.run()
 

@@ -9,8 +9,8 @@ setup(
     version='1.0.0', 
     description='package for simple exploring of python objects',
     author='Edwin Saul',
-    author_email='edwinsaulpm@gmail.com',
-    url="https://edwinsaul.com",
+    author_email='edwinsaul@proton.me',
+    url="https://edwinsaul.com/index.html?p=pyVisor",
     packages=find_packages(),  # Automatically discover and include all packages
     keywords='DEV debug flask',
     install_requires=[
