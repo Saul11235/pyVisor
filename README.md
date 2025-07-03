@@ -36,7 +36,7 @@ pyVisor as an CLI application:
 pyVisor tkinter
 </pre>
 <pre>
-pyVisor from os.path import readme
+pyVisor from os.path import join
 </pre>
 
 use Ctrl+C to end.
