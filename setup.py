@@ -6,7 +6,7 @@ f.close()
 
 setup(
     name='pyVisor',         
-    version='1.0.0', 
+    version='1.1.0', 
     description='package for simple exploring of python objects',
     author='Edwin Saul',
     author_email='edwinsaul@proton.me',
@@ -18,5 +18,10 @@ setup(
     ],
     long_description=readme_file,
     long_description_content_type="text/markdown",
+    entry_points={
+        'console_scripts': [
+            'pyVisor= pyVisor.pyVisorCLI:main',
+        ],
+    },
 
 )

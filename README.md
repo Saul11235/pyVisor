@@ -7,22 +7,33 @@
 [![view on PyPI](https://img.shields.io/badge/-view_on_PyPI-red)](https://pypi.org/project/pyVisor/)
 
 
-pyVisor is an package - webAplication writed in flask to
-view the content of an python object
+pyVisor is a package - webAplication writed in flask to
+view the content of a python object
 
 ## How to install 
 
 - *recomended:* : <code>pip install pyVisor</code>
-- use the script: <code>python ./SCRIPT_installFromSource.py</code>
 
 ## How to use
 
-python scpript:
+in python scripting:
 <pre>
 from pyVisor import visor
-v=visor(object,"NameObject")
+import tkinter
+
+v=visor(tkinter,"tkinter")
 v.run()
 </pre>
+
+pyVisor as an CLI application:
+<pre>
+pyVisor tkinter
+</pre>
+<pre>
+pyVisor from os.path import listdir
+</pre>
+
+use Ctrl+C to end.
 
 writed by:
 [![Edwin Saul](https://img.shields.io/badge/-Edwin_Saul-black)](https://edwinsaul.com)
