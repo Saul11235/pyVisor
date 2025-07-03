@@ -14,6 +14,12 @@ view the content of a python object
 
 - *recomended:* : <code>pip install pyVisor</code>
 
+
+## How does it work?
+
+Detects a Python object and launches a web application 
+to browse and view its contents, pyVisor requires Flask
+
 ## How to use
 
 in python scripting:
@@ -30,11 +36,12 @@ pyVisor as an CLI application:
 pyVisor tkinter
 </pre>
 <pre>
-pyVisor from os.path import listdir
+pyVisor from os.path import readme
 </pre>
 
 use Ctrl+C to end.
 
-writed by:
-[![Edwin Saul](https://img.shields.io/badge/-Edwin_Saul-black)](https://edwinsaul.com)
+## Credits
+
+[![Edwin Saul](https://img.shields.io/badge/-Writed_by_Edwin_Saul-black)](https://edwinsaul.com)
 
