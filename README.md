@@ -38,6 +38,11 @@ pyVisor tkinter
 <pre>
 pyVisor from os.path import join
 </pre>
+<pre>
+pyVisor ./myScript.py
+</pre>
+
+
 
 use Ctrl+C to end.
 

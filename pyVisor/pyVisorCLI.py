@@ -1,12 +1,57 @@
 try   :  from .__init__ import visor
 except:  from __init__  import visor
 
-from sys       import  argv
-from importlib import  import_module
+from sys            import  argv
+from shlex          import  split
+from importlib      import  import_module
+
+from os.path        import  isfile,isdir,join,basename
+
+from importlib.util import  spec_from_file_location,module_from_spec
+
 
 def get_sys_args():
     # sys.argv[1:] excluye el nombre del script (argv[0])
-    return [arg.strip() for arg in argv[1:] if arg.strip()]
+    full_string  = ' '.join(argv[1:])
+    response     = []
+    counter_str  = ""
+    in_str       = False
+    type_str     = 1     # 1 -> ""  2-> ''
+    # ---------------
+    def add_to_response():
+        nonlocal response, in_str, counter_str
+        if in_str:
+            response.append(counter_str[:])
+            counter_str="" 
+        else:
+            for x in counter_str.split(" "):
+                if len(x) and x!=" ": response.append(x)
+            counter_str=""
+    # ---------------
+    for x in full_string:
+        if in_str:
+            if   x=='"' and type_str==1:
+                add_to_response()
+                in_str = False
+            elif x=='"' and type_str==2:
+                add_to_response()
+                in_str = False
+            else:
+                counter_str+=x
+        else:
+            if   x=='"':   # begin str
+                add_to_response()
+                in_str   = True
+                type_str = 1
+            elif x=="'":   # begin str
+                add_to_response()
+                in_str   = True
+                type_str = 2
+            else:
+                counter_str+=x
+    # ---------------
+    add_to_response()
+    return response
 
 #---------------------------
 
@@ -38,6 +83,9 @@ def print_error_syntax():
     print(f"""
  Error, invalid syntax, valid examples
 
+ pyVisor ./my_sript.py
+ pyVisor ./my_package
+
  pyVisor tkinter
  pyVisor os.path
  pyVisor tkinter as tk
@@ -52,8 +100,23 @@ def print_error_syntax():
 
 #---------------------------
 
+def is_local_content(args):
+    "Return True or False if is an script.py or package"
+    if len(args)!=1:
+        return False
+    elif isfile(str(args[0])) and (str(args[0]).endswith(".py") or str(args[0]).endswith(".pyw") ):
+        return True
+    elif isdir(str(args[0])):
+        if isfile(join(str(args[0]),"__init__.py")):
+              return True
+        else: return False
+    else:     return False
+
+#---------------------------
 
 def sort_args(args):
+    if is_local_content(args): return args
+    # ---------------
     response=[]
     if   len(args)==0:  # nothing
         pass
@@ -80,6 +143,18 @@ def sort_args(args):
 #---------------------------
 
 def get_alias(args):
+    "return an string with the literal name of the obj"
+    # ---------------
+    if is_local_content(args):
+        try     : 
+            alias = basename(args[0]).split(".")
+            if len(alias)==0: alias.append("")
+            alias = alias[:-1]
+            alias = "".join(alias)
+            if alias == "": return "module"
+            else          : return alias
+        except  : return str(args[0]).replace("/","").replace("\\","")
+    # ---------------
     response=""
     if "as" in args and len(args)==3:  # object as alias
         if args[1]=="as" : response=args[2]
@@ -94,6 +169,18 @@ def get_alias(args):
 
 def get_object(args):
     "return a list [object,bool] True if ok, False if not"
+    # ---------------
+    if is_local_content(args):
+        try:
+            path=args[0]
+            if isdir(path):path=join(path,"__init__.py")
+            spec   = spec_from_file_location(get_alias(args), path)
+            module = module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return [module,True]
+        except:
+            return [None,False]
+    # ---------------
     sorted_args=sort_args(args)
     # if sorted args     -----------
     if   len(sorted_args)==0:
@@ -123,19 +210,33 @@ def get_object(args):
 #---------------------------
 def main():
     "CLI command for use pyVisor"
+    # test Mode  
+    testMode = False# <--- to enable test mode
+    # run TestMode
     args=get_sys_args()
+    # test Mode args
+    if testMode:print('----------------------------')
+    if testMode:print('args       : ',args)
     # no arguments
     if len(args)==0        : print_message()
     # sorting args
     sorted_args = sort_args(args)
+    # test Mode sorted_args
+    if testMode:print('----------------------------')
+    if testMode:print('sort_args  : ',sorted_args)
     if len(sorted_args)==0 : print_error_syntax()
     # get objects
     alias_obj   = get_alias  (args)
     python_obj  = get_object (args)
+    # test Mode sorted_args
+    if testMode:print('----------------------------')
+    if testMode:print('alias_obj  : ',alias_obj)
+    if testMode:print('----------------------------')
+    if testMode:print('python_obj : ',python_obj)
+    if testMode:print('----------------------------')
     # run pyvisor  web app
-    if python_obj[1]:
+    if python_obj[1] and not(testMode):
         v=visor(python_obj[0],alias_obj)
         v.run()
     else:
         print_not_found()
-

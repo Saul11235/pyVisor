@@ -6,7 +6,7 @@ f.close()
 
 setup(
     name='pyVisor',         
-    version='1.1.0', 
+    version='1.2.0', 
     description='package for simple exploring of python objects',
     author='Edwin Saul',
     author_email='edwinsaul@proton.me',
